@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Проверка доступа</title>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Пожалуйста, подтвердите, что вы не бот</h2>
+
+  <form id="captcha-form">
+    <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAABgkMlGtsN_njre7"
+         data-callback="onCaptchaSuccess">
+    </div>
+    <br>
+    <button type="submit" id="go-button" disabled>Перейти</button>
+  </form>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmParams = Array.from(urlParams.entries())
+      .filter(([key]) => key.startsWith('utm_') || key === 'id')
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+      .join('&');
+
+    const finalUrl = utmParams
+      ? "https://aptitudeassessment.com/tjF54Z4T?param=tqv15_mejit&aff_sub={sub_source}" + "&" + utmParams
+      : "https://aptitudeassessment.com/tjF54Z4T?param=tqv15_mejit&aff_sub={sub_source}";
+
+    function onCaptchaSuccess(token) {
+      document.getElementById('go-button').disabled = false;
+    }
+
+    document.getElementById('captcha-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = finalUrl;
+    });
+  </script>
+</body>
+</html>
