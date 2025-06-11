@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Редирект...</title>
+  <script src="redirect(last)_list.js"></script>
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const id = getQueryParam("id");
+    const target = redirectMap[id];
+
+    if (target) {
+      window.location.href = target;
+    } else {
+      document.write("<h1>Ссылка не найдена</h1><p>ID: " + id + "</p>");
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
